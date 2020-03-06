@@ -1,10 +1,16 @@
 from collections import Counter
+import bogo
 weights = Counter()
 rules = bogo.get_telex_definition()
 
 outfile = open('vietnamese.dict.yaml', 'wt')
-for line in open('vietnamese_orig.dict.yaml'):
+is_started = False
+for line in open('hannom.dict.yaml'):
   line = line.strip()
+  if not is_started:
+    if line == '...':
+      is_started = True
+    continue
   if '#' in line:
     line = line[:line.index('#')].strip()
   parts = line.split('\t')
@@ -15,6 +21,9 @@ for line in open('vietnamese_orig.dict.yaml'):
     continue
   telex = parts[1].strip()
   weights[telex] += weight
+  if 'uwow' in telex:
+    telex = telex.replace('uwow', 'uow')
+    weights[telex] += weight
 
 print('''# Rime dictionary
 # encoding: utf-8
