@@ -3,6 +3,20 @@ import bogo
 weights = Counter()
 rules = bogo.get_telex_definition()
 
+def capitalize_first_letter_of_word(word):
+  return word[0].upper() + word[1:]
+
+def capitalize_first_letter_of_all_words(words):
+  return ' '.join([capitalize_first_letter_of_word(word) for word in words.split(' ')])
+
+def get_variants(telex):
+  output = [telex]
+  if 'uwow' in telex:
+    output.extend(get_variants(telex.replace('uwow', 'uow')))
+  if telex[0] in 'abcdefghijklmnopqrstuvwxyz':
+    output.extend(get_variants(capitalize_first_letter_of_all_words(telex)))
+  return output
+
 outfile = open('vietnamese.dict.yaml', 'wt')
 is_started = False
 for line in open('hannom.dict.yaml'):
@@ -20,9 +34,9 @@ for line in open('hannom.dict.yaml'):
   elif len(parts) != 2:
     continue
   telex = parts[1].strip()
-  weights[telex] += weight
-  if 'uwow' in telex:
-    telex = telex.replace('uwow', 'uow')
+  if telex == '':
+    continue
+  for telex in get_variants(telex):
     weights[telex] += weight
 
 print('''# Rime dictionary
