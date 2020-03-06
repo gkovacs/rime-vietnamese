@@ -12,6 +12,7 @@ schema:
   dependencies:
     - terra_pinyin.extended # for using reverse lookup
     - stroke
+    - hannom
 
 switches:
   - name: ascii_mode
@@ -535,6 +536,7 @@ hanja_reverse_lookup:
 
 reverse_lookup:
   dictionary: hannom
+  prism: hannom
   spelling_hints: 10
   prefix: "`"
   preedit_format:
