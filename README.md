@@ -4,6 +4,7 @@
 
 This is a layout for typing in Vietnamese / Tiếng Việt / Việt Ngữ (越語 / 㗂越). Supports both chữ Quốc ngữ (國語字 / 𡨸國語) and chữ Nôm (喃字 / 𡨸喃)
 
+![screenshot](images/screenshot.png)
 
 ## Installing
 
@@ -14,7 +15,7 @@ cd ~/Library/Rime
 wget https://git.io/rime-install
 ```
 
-Then install `gkovacs/rime-` using plum:
+Then install `gkovacs/rime-vietnamese` using plum:
 
 ```bash
 bash rime-install gkovacs/rime-vietnamese
